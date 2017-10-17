@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Upload de plusieurs fichiers à la fois</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+
 </head>
 <body>
 <?php
@@ -29,6 +33,7 @@ if (isset($_POST['submit'])) {
                         //Upload the file into the temp dir
                         if (move_uploaded_file($tmpFilePath, $filePath)) {
                             $files[] = $shortname;
+                            $filePaths[] = $filePath;
                         }
                     } else {
                         echo "Votre fichier doit être un gif, png ou jpg";
@@ -43,18 +48,22 @@ if (isset($_POST['submit'])) {
         }
     }
 
-    if (is_array(@$files)) {
+    if (is_array(@$filePaths)) {
+        echo "<div class=\"row\">";
 
-        echo "<h1>Fichiers uploadés:</h1>";
-        echo "<ul>";
-        foreach ($files as $file) {
+        foreach ($filePaths as $file) {
 
-            echo "<li>$file </li>";
+            echo "<div class=\"col-xs-6 col-md-3\">
+        <a href=\"$file\" class=\"thumbnail\">
+            <img src='$file' alt=\"$file\">
+        </a>
+    </div>";
         }
-        echo "</ul>";
+        echo "</div>";
     }
 }
 ?>
+
 
 <form action="" enctype="multipart/form-data" method="post">
 
