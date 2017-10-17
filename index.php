@@ -64,7 +64,7 @@ if (isset($_POST['submit'])) {
         <a href=\"$file\" class=\"thumbnail\">
             <img src='$file' alt=\"$file\">
         </a>
-        <input type=\"hidden\" value=\"$file\" name=\"fileToDelete\">
+        <input type=\"text\" value=\"$file\" name=\"fileToDelete\">
         <input type=\"submit\" name=\"delete\" value=\"Supprimer cette image du serveur\">
     </div>";
         }
