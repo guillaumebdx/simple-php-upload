@@ -39,7 +39,7 @@ if (isset($_POST['submit'])) {
                         $filePath = "uploaded/" . date('d-m-Y-H-i-s') . '-' . $_FILES['upload']['name'][$i];
                         //Upload the file into the temp dir
                         if (move_uploaded_file($tmpFilePath, $filePath)) {
-                            $files[] = $shortname;
+                           // $files[] = $shortname;
                             $filePaths[] = $filePath;
                         }
                     } else {
@@ -64,7 +64,7 @@ if (isset($_POST['submit'])) {
         <a href=\"$file\" class=\"thumbnail\">
             <img src='$file' alt=\"$file\">
         </a>
-        <input type=\"text\" value=\"$file\" name=\"fileToDelete\">
+        <input type=\"hidden\" value=\"$file\" name=\"fileToDelete\">
         <input type=\"submit\" name=\"delete\" value=\"Supprimer cette image du serveur\">
     </div>";
         }
