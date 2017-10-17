@@ -10,6 +10,13 @@
 </head>
 <body>
 <?php
+if (isset($_POST['delete'])) {
+    $fileToDelete = $_POST['fileToDelete'];
+    unlink($fileToDelete);
+    echo "l'image a bien été supprimée";
+}
+
+
 
 if (isset($_POST['submit'])) {
 
@@ -19,7 +26,7 @@ if (isset($_POST['submit'])) {
             if ($tmpFilePath != "") {
                 $shortname = $_FILES['upload']['name'][$i];
                 $size = $_FILES['upload']['size'][$i];
-                $type = $_FILES['upload']['type'][$i];
+                //$type = $_FILES['upload']['type'][$i];
                 //infoFichier va récupérer les information du fichier dans un tableau associatif, on va récupérer la clé extension dans ce tableau
                 $infoFichier = pathinfo($_FILES['upload']['name'][$i]);
                 $extension = $infoFichier['extension'];
@@ -49,7 +56,7 @@ if (isset($_POST['submit'])) {
     }
 
     if (is_array(@$filePaths)) {
-        echo "<div class=\"row\">";
+        echo "<form method=\"post\" target=\"\"> <div class=\"row\">";
 
         foreach ($filePaths as $file) {
 
@@ -57,9 +64,11 @@ if (isset($_POST['submit'])) {
         <a href=\"$file\" class=\"thumbnail\">
             <img src='$file' alt=\"$file\">
         </a>
+        <input type=\"text\" value=\"$file\" name=\"fileToDelete\">
+        <input type=\"submit\" name=\"delete\" value=\"Supprimer cette image du serveur\">
     </div>";
         }
-        echo "</div>";
+        echo "</div></form>";
     }
 }
 ?>
